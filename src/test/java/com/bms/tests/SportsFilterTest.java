@@ -1,23 +1,28 @@
 package com.bms.tests;
 
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.bms.base.BaseClass;
 import com.bms.pages.HomePage;
 import com.bms.pages.SportsPage;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.bms.utils.ExtentReport;
 
 public class SportsFilterTest extends BaseClass {
 
     SportsPage sportsPage;
     HomePage homePage;
-
+    @BeforeClass
+    public void extent() {
+    	ExtentReport.createTest("SportsPageTest");
+    }
     @BeforeMethod
     public void prepareSportsPage() {
         // 1. Start from Home and Navigate to Sports
         homePage = new HomePage(driver);
         homePage.goToSports();
-
         // 2. Initialize the SportsPage object once for this class
         sportsPage = new SportsPage(driver);
     }
