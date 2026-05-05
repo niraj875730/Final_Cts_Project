@@ -1,23 +1,29 @@
 package com.bms.tests;
 
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.bms.base.BaseClass;
 import com.bms.pages.HomePage;
 import com.bms.pages.MoviesPage;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.bms.utils.ExtentReport;
 
 public class MovieDashboardTest extends BaseClass {
 
     MoviesPage moviesPage;
     HomePage homePage;
-
+    
+    @BeforeClass
+    public void extent() {
+    	ExtentReport.createTest("MoviePageTest");
+    }
     @BeforeMethod
     public void prepareMoviesPage() {
         // Start from Master Home Page
         homePage = new HomePage(driver);
         homePage.goToMovies();
-
         // Initialize once for this class
         moviesPage = new MoviesPage(driver);
     }

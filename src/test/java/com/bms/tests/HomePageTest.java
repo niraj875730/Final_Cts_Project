@@ -1,19 +1,26 @@
 package com.bms.tests;
 
-import com.bms.base.BaseClass;
-import com.bms.pages.HomePage;
-import com.bms.utils.ObjectReader;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import com.bms.base.BaseClass;
+import com.bms.pages.HomePage;
+import com.bms.utils.ExtentReport;
+import com.bms.utils.ObjectReader;
 
 public class HomePageTest extends BaseClass {
 
     HomePage homePage;
-
+    @BeforeClass
+    public void extent() {
+    	ExtentReport.createTest("HomePageTest");
+    }
     @BeforeMethod
     public void prepareHomePage() {
         // Navigate to Master Home (index.html)
+    	
         driver.get(ObjectReader.getProperty("url"));
         homePage = new HomePage(driver);
     }

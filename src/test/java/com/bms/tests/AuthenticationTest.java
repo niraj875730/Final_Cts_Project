@@ -1,14 +1,17 @@
 
 package com.bms.tests;
 
-import com.bms.base.BaseClass;
-import com.bms.utils.*;
-import com.bms.pages.HomePage;
-import com.bms.pages.LoginPage;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import com.bms.base.BaseClass;
+import com.bms.pages.HomePage;
+import com.bms.pages.LoginPage;
+import com.bms.utils.ExtentReport;
+import com.bms.utils.ListenerUtil;
 
 @Listeners(ListenerUtil.class) 
 public class AuthenticationTest extends BaseClass {
@@ -16,12 +19,15 @@ public class AuthenticationTest extends BaseClass {
 
     LoginPage loginPage;
     HomePage homePage;
+    @BeforeClass
+    public void extent() {
+    	ExtentReport.createTest("LoginPageTest");
+    }
     @BeforeMethod
     public void preparePage() {
         // 1. Navigate to the page
         homePage=new HomePage(driver);
         homePage.goToSignIn();
-
         // 2. Initialize the object once for this class
         loginPage = new LoginPage(driver);
         
